@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->unsignedInteger('customer_type_id')->nullable()->index();
+            $table->uuid('customer_type_id')->nullable()->index();
             $table->uuid('application_id')->nullable()->index();
             $table->string('firt_name')->nullable();
             $table->string('last_name')->nullable();

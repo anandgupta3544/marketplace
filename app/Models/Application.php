@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
+    use \Illuminate\Database\Eloquent\Factories\HasFactory;
+
     protected $table = 'applications';
 
     protected $primaryKey = 'id';
@@ -43,4 +45,19 @@ class Application extends Model
         'other_data' => 'array',
         'status' => 'string',
     ];
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'application_id', 'id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(MasterProduct::class, 'product_id', 'id');
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(MasterBranch::class, 'branch_id', 'id');
+    }
 }
