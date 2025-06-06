@@ -15,6 +15,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('slug')->unique()->index();
             $table->string('name');
+            $table->string('code')->unique()->index();
+            $table->unsignedInteger('hfc_id')->nullable();
+            $table->unsignedInteger('nbfc_id')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
