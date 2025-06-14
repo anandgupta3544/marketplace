@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
+use App\Jobs\GenerateSalesFormReport;
+use PHPUnit\Event\Code\Test;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,4 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+// Add a route to dispatch the job
+Route::get('/dispatch-job', function () {
+    GenerateSalesFormReport::dispatch();
+    return 'Job dispatched!';
+});
+
+
+Route::get('/test-job', [TestController::class, 'test']);
